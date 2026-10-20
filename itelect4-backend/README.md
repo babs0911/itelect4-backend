@@ -20,7 +20,7 @@ The API listens on port `4000` by default. `CORS_ORIGIN` accepts a comma-separat
 
 ## Vercel deployment
 
-Create a Vercel project from the backend repository and set its Root Directory to `itelect4-backend`. Add `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN` as project environment variables for the environments being deployed. Once the frontend is deployed, set `CORS_ORIGIN` to its exact origin and redeploy. Verify that `/api/health` returns JSON with `"db": true`.
+Create a Vercel project from the backend repository and set its Root Directory to the nested `itelect4-backend` folder (the repository also contains the frontend). Add `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN` as project environment variables for the environments being deployed. Once the frontend is deployed, set `CORS_ORIGIN` to its exact origin and redeploy. Verify that `/api/health` returns JSON with `"db": true`.
 
 Set the Vercel Production environment's Branch Tracking setting to `gt4-part2` so production deployments use the configured branch.
 
