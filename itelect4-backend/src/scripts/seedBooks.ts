@@ -1,5 +1,6 @@
 import "dotenv/config";
 
+import { setServers } from "node:dns";
 import mongoose from "mongoose";
 
 import { BookModel } from "../models/book.js";
@@ -38,7 +39,25 @@ async function seedBooks(): Promise<void> {
   const mongoUri = process.env.MONGODB_URI;
   if (!mongoUri) throw new Error("MONGODB_URI is not configured");
 
-  await mongoose.connect(mongoUri);
+  try {
+    await mongoose.connect(mongoUri);
+  } catch (error) {
+    if (
+      mongoUri.startsWith("mongodb+srv://") &&
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      error.code === "ECONNREFUSED" &&
+      "syscall" in error &&
+      error.syscall === "querySrv"
+    ) {
+      console.warn("System DNS refused the MongoDB SRV lookup; retrying with Cloudflare DNS");
+      setServers(["1.1.1.1", "1.0.0.1"]);
+      await mongoose.connect(mongoUri);
+    } else {
+      throw error;
+    }
+  }
   try {
     await BookModel.bulkWrite(
       books.map((book) => ({
