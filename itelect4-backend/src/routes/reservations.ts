@@ -1,9 +1,10 @@
 import { Router } from "express";
-import { isValidObjectId, Types } from "mongoose";
+import { isValidObjectId } from "mongoose";
 
-import { auth } from "../middleware/auth";
-import { ReservationModel } from "../models/reservation";
-import { ReservationStatus, type ReservationUpdateBody } from "../types";
+import { auth } from "../middleware/auth.js";
+import { ReservationModel } from "../models/reservation.js";
+import { reservationRepository } from "../repositories/reservationRepository.js";
+import { ReservationStatus, type ReservationUpdateBody } from "../types/index.js";
 
 const router = Router();
 router.use(auth);
@@ -45,9 +46,9 @@ router.post("/", async (req, res) => {
     res.status(400).json({ message: "reservedUntil must be a valid date" });
     return;
   }
-  const reservation = await ReservationModel.create({
-    bookId: new Types.ObjectId(bookId),
-    userId: new Types.ObjectId(req.userId!),
+  const reservation = await reservationRepository.create({
+    bookId,
+    userId: req.userId!,
     ...(status === undefined ? {} : { status: status as ReservationStatus }),
     ...(reservedUntil === undefined ? {} : { reservedUntil: new Date(reservedUntil as string) }),
     ...(renewalCount === undefined ? {} : { renewalCount }),

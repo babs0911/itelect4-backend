@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import { ReservationStatus, type ReservationDoc } from "../types";
+import { ReservationStatus, type ReservationDoc } from "../types/index.js";
 
 const reservationSchema = new Schema<ReservationDoc>(
   {

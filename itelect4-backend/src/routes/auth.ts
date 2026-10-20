@@ -2,9 +2,9 @@ import { compare, hash } from "bcryptjs";
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 
-import { UserModel } from "../models/user";
+import { UserModel } from "../models/user.js";
 
-const router = Router();
+export const authRouter = Router();
 
 function getJwtSecret(): string {
   const secret = process.env.JWT_SECRET;
@@ -12,7 +12,7 @@ function getJwtSecret(): string {
   return secret;
 }
 
-router.post("/register", async (req, res) => {
+authRouter.post("/register", async (req, res) => {
   const { name, email, password } = req.body as Record<string, unknown>;
   if (typeof name !== "string" || typeof email !== "string" || typeof password !== "string" || password.length < 8) {
     res.status(400).json({ message: "Name, email, and a password of at least 8 characters are required" });
@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.post("/login", async (req, res) => {
+authRouter.post("/login", async (req, res) => {
   const { email, password } = req.body as Record<string, unknown>;
   if (typeof email !== "string" || typeof password !== "string") {
     res.status(400).json({ message: "Email and password are required" });
@@ -52,7 +52,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-export default router;
+export default authRouter;
 
 function publicUser(user: { id: string; name: string; email: string; role: string; isActive: boolean }) {
   return { id: user.id, name: user.name, email: user.email, role: user.role, isActive: user.isActive };
