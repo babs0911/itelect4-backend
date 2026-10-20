@@ -22,4 +22,6 @@ The API listens on port `4000` by default. `CORS_ORIGIN` accepts a comma-separat
 
 Create a Vercel project from the backend repository and set its Root Directory to `itelect4-backend`. Add `MONGODB_URI`, `JWT_SECRET`, and `CORS_ORIGIN` as project environment variables for the environments being deployed. Once the frontend is deployed, set `CORS_ORIGIN` to its exact origin and redeploy. Verify that `/api/health` returns JSON with `"db": true`.
 
+Set the Vercel Production environment's Branch Tracking setting to `gt4-part2` so production deployments use the configured branch.
+
 The Atlas network access list must permit the deployed backend to connect. Allowing `0.0.0.0/0` permits connections from any IP; restrict it to trusted addresses when the deployment environment supports stable egress IPs.
