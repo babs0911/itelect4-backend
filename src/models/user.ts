@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-import type { UserDoc } from "../types";
+import type { UserDoc } from "../types/index.js";
 
 const userSchema = new Schema<UserDoc>(
   {

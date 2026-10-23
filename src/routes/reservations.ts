@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { isValidObjectId } from "mongoose";
 
-import { auth } from "../middleware/auth";
-import { ReservationModel } from "../models/reservation";
-import { reservationRepository } from "../repositories/reservationRepository";
-import { ReservationStatus, type ReservationUpdateBody } from "../types";
+import { auth } from "../middleware/auth.js";
+import { ReservationModel } from "../models/reservation.js";
+import { reservationRepository } from "../repositories/reservationRepository.js";
+import { ReservationStatus, type ReservationUpdateBody } from "../types/index.js";
 
 const router = Router();
 router.use(auth);
