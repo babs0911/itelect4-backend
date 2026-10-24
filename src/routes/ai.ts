@@ -1,5 +1,5 @@
 import { Router, type Request, type Response } from "express";
-import rateLimit from "express-rate-limit";
+import { rateLimit } from "express-rate-limit";
 
 import { auth } from "../middleware/auth.js";
 import { askLibraryAssistant } from "../ai/gemini.js";
