@@ -1,6 +1,6 @@
 import type { AiReply } from "../schemas/ai.js";
 
-export const MODEL = "gemini-flash-latest";
+export const MODEL = "gemini-3.8-flash";
 
 export const SYSTEM_PROMPT = `
 You are the Library Assistant for the Library Book Reservation System.

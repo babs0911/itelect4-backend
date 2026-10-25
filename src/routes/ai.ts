@@ -35,14 +35,24 @@ aiRouter.post("/", async (req: Request, res: Response) => {
     const reply = await askLibraryAssistant(parsed.data.prompt);
     res.json(reply);
   } catch (error) {
-    if (
+    const status =
       typeof error === "object" &&
       error !== null &&
       "status" in error &&
-      error.status === 429
-    ) {
+      typeof error.status === "number"
+        ? error.status
+        : undefined;
+
+    if (status === 429) {
       res.status(429).json({
         message: "The library assistant is temporarily out of AI requests. Please try again later.",
+      });
+      return;
+    }
+
+    if (status === 503 || status === 504) {
+      res.status(503).json({
+        message: "The library assistant is busy right now. Please try again shortly.",
       });
       return;
     }
