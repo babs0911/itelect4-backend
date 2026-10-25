@@ -1,7 +1,7 @@
 import { Types } from "mongoose";
 
-import { ReservationModel } from "../models/reservation";
-import { type ReservationStatus } from "../types";
+import { ReservationModel } from "../models/reservation.js";
+import { type ReservationStatus } from "../types/index.js";
 
 interface CreateReservationInput {
   bookId: string;
