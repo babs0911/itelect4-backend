@@ -1,3 +1,5 @@
+[![CI](https://github.com/babs0911/itelect4-backend/actions/workflows/ci.yml/badge.svg?branch=gt6-tests)](https://github.com/babs0911/itelect4-backend/actions/workflows/ci.yml)
+
 # Library Book Reservation API
 
 Express and MongoDB API for the Library Book Reservation frontend.
